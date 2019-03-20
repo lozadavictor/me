@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>vict.dev 💻</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4AQMAAAADqqSRAAAAAXNSR0IB2cksfwAAAANQTFRFAJH9DCwIIAAAABdJREFUeJxjYBgFo2AUjIJRMApGAb0BAAeAAAE5TYQiAAAAAElFTkSuQmCC">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <section class="container">
+        <article class="text-container">
+            <p class="text loop">**************</p>
+            <p class="text">💻</p>
+        </article>
+        <article class="contact-info">
+            <p>Contact me at: <a href="mailto:me@vict.dev">me@vict.dev</a></p>
+        </article>
+    </section>
+    <script>
+        /****        _        __                  __                        __      
+             _   __ (_)_____ / /_ ____   _____   / /____  ____  ____ _ ____/ /____ _
+            | | / // // ___// __// __ \ / ___/  / // __ \/_  / / __ `// __  // __ `/
+            | |/ // // /__ / /_ / /_/ // /     / // /_/ / / /_/ /_/ // /_/ // /_/ / 
+            |___//_/ \___/ \__/ \____//_/     /_/ \____/ /___/\__,_/ \__,_/ \__,_/  
+        
+            Hello, i'm Victor Lozada Front-end developer (learning every day to be a full stack). 
+            This website is not the final version, i have the goal for may 2019 of complete all my portafolio and my new blog (the blog will be only in spanish).
+            i'm Venezuelan from Caracas, but now i'm in Spain.
+            Contact me at: me@vict.dev or send me a message here: https://platzi.com/@VictorLozada/
+        ****/
+        const randomInt = (min,max) => ~~(Math.random() * (max - min + 1)) + min
+        const randomText = (textLen) =>{
+            const chars = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890!".@$%&/()=?¿¡<>,.|\\[]{}'
+            let finalChars = ''
+            const charsLen = chars.length
+            for (let i = 0; i< textLen; i++){
+                finalChars += chars[randomInt(0,charsLen - 1)] 
+            }
+            return finalChars
+        }
+        
+        const addTextToElement = (el,content, reset) => reset ? el.innerText = content : el.innerText += content
+        const textLoop = (config) => {
+            const { element, finalText, addLetterLimit, speedMs} = config
+            const textLen = finalText.length
+            
+            let finalTextArray = [...finalText]
+            let letterMemory = []
+            let addLetterCount = 0
+
+            const loop = setInterval(() =>{
+                if(letterMemory.join('').length === textLen){
+                    clearInterval(loop)
+                    return;
+                }
+                let arrayText = [...randomText(textLen)]
+
+                if(addLetterCount === addLetterLimit){
+                    const evailableFinalLetters = finalTextArray.map((letter,index) =>{
+                        if(letter !== letterMemory[index]){
+                            return {letter, index}
+                        }
+                    }).filter(item => item)
+                    const finalLetter = evailableFinalLetters[randomInt(0,evailableFinalLetters.length - 1)]
+                    letterMemory[finalLetter.index] = finalLetter.letter
+                    addLetterCount = 0
+                }
+                if(letterMemory.length > 0){
+                    letterMemory.map((letter,index) => arrayText[index] = letter)
+                }
+                const text = arrayText.join('')
+                addTextToElement(element,text,true)
+                addLetterCount++
+            },speedMs)
+        }
+    
+        textLoop({
+            element: document.querySelector('.loop'), 
+            finalText: "Victor Lozada",
+            addLetterLimit: 3, 
+            speedMs: 150 
+        })
+    </script>
+</body>
+</html>
