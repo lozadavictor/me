@@ -170,7 +170,7 @@ function animateCSS(element, ...animateClasses) {
                 },
             }),
             new Writer({
-                delay: 25,
+                delay: 145,
                 container: "#about",
                 text: aboutTextContent,
                 callBack: (container) => {},
