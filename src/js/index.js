@@ -160,7 +160,7 @@ function animateCSS(element, ...animateClasses) {
 
         const writers = [
             new Writer({
-                delay: 1,
+                delay: 120,
                 container: "#primaryText",
                 text: primaryTextContent,
                 callBack: (container) => {
@@ -170,7 +170,7 @@ function animateCSS(element, ...animateClasses) {
                 },
             }),
             new Writer({
-                delay: 145,
+                delay: 25,
                 container: "#about",
                 text: aboutTextContent,
                 callBack: (container) => {},
