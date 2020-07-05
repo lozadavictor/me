@@ -60,7 +60,9 @@ class Writer {
         return this.callBack(this.container);
     }
 
-    togglePause = () => (this.paused = !this.paused);
+    togglePause() {
+        this.paused = !this.paused;
+    }
 
     async play() {
         try {
