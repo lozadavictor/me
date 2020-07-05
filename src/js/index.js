@@ -143,7 +143,7 @@ function animateCSS(element, ...animateClasses) {
     });
 }
 
-(async () => {
+async function init() {
     try {
         const {
             primaryTextContent,
@@ -173,7 +173,6 @@ function animateCSS(element, ...animateClasses) {
                 delay: 25,
                 container: "#about",
                 text: aboutTextContent,
-                callBack: (container) => {},
             }),
             new Writer({
                 delay: 100,
@@ -255,4 +254,5 @@ function animateCSS(element, ...animateClasses) {
     } catch (error) {
         console.log(error);
     }
-})();
+}
+init();
